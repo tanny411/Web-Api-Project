@@ -1,0 +1,166 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Bank Api
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+
+  /balance:
+    x-swagger-router-controller: bank
+    post:
+      description: Checking Balance
+      operationId: balance
+      parameters:
+        - name: Check Balance
+          description: Checking Balance
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Balance"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/BalanceResponse"
+        "401":
+          description: Amount Not Available
+          schema:
+            $ref: "#/definitions/AmountError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /send:
+    x-swagger-router-controller: bank
+    post:
+      description: Transferring Money
+      operationId: send
+      parameters:
+        - name: Send
+          description: Transferring Money
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Send"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /verify:
+    x-swagger-router-controller: bank
+    post:
+      description: Verify Trasaction
+      operationId: verify
+      parameters:
+        - name: Verify
+          description: Verify Trasaction
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Verify"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  Balance:
+    required:
+      - Account Number
+      - Pin
+    properties:
+      Account Number:
+        type: number
+      Pin:
+        type: number
+        
+  BalanceResponse:
+    required:
+      - Amount
+    properties:
+      Amount:
+        type: number
+
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+        
+  Send:
+    required:
+      - From Account
+      - Pin
+      - Amount
+      - To Account
+    properties:
+      From Account:
+        type: number
+      Pin:
+        type: number
+      Amount:
+        type: number
+      To Account:
+        type: number
+        
+  Verify:
+    required:
+      - From Account
+      - Transaction record
+      - Amount
+      - To Account
+    properties:
+      From Account:
+        type: number
+      Transaction record:
+        type: number
+      Amount:
+        type: number
+      To Account:
+        type: number
+        
+  AmountError:
+    type: object
+    properties:
+      message:
+        type: string
+        
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: returns 1 if successful
+      description:
+        type: string
+        description: a short comment

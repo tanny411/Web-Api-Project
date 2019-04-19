@@ -176,12 +176,15 @@ definitions:
   BuyItem:
     type: object
     properties:
-      item: 
-        type: number
-        description: item ID
-      amount:
-        type: number
-        description: how many of each item
+      items:
+        type: object
+        properties:
+          item: 
+            type: number
+            description: item ID
+          amount:
+            type: number
+            description: how many of each item
       user:
         type: string
         description: the user who is placing the order
