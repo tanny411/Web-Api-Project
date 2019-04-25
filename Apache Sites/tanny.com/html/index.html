@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<title>Welcome to Ayshas Webpage</title>
+</head>
+
+<body>
+	<h1>Ayshas Site Loaded Successfully :D</h1>
+	<div>
+		Username <input type='text' name='username'>
+		Password <input type='password' name='password'>
+		<input type="submit" value="Login" id='ok'>
+	</div>
+	<h3 id='res'></h3>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(function () {
+		document.getElementById("ok").onclick = send;
+		function send() {
+			console.log('Clicked!');
+			var name = document.getElementsByName("username")[0].value;
+			var pass = document.getElementsByName("password")[0].value;
+
+			console.log(name, pass);
+			var obj = {
+				username: name,
+				password: pass
+			};
+
+			console.log(JSON.stringify(obj));
+			////////////////////////////////////////////////////////////////////////////////////
+
+			$.ajax({
+				url: "http://localhost:10100/login",
+				contentType: "application/json",
+				type: "POST",
+				data: JSON.stringify(obj),
+				success: function (result) {
+					console.log("hoise kintu");
+					console.log(result);
+					//alert("Data: " + data + "\nStatus: " + status);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					console.log(jqXHR);
+					console.log(textStatus);
+					console.log(errorThrown);
+					console.log(obj);
+				}
+			});
+
+
+			// $.post("http://localhost:10010/login",
+			// 	{
+			// 		username: name,
+			// 		password: pass
+			// 	},
+			// 	function (data, status) {
+			// 		console.log("hoise kintu");
+			// 		alert("Data: " + data + "\nStatus: " + status);
+			// 	});
+
+
+			///////////////////////////////////////////////////////////////////////////////////
+
+			// var xhr = new XMLHttpRequest();
+			// var url = "http://localhost:10010/login";
+			// xhr.open("POST", url, true);
+			// xhr.setRequestHeader("Content-type", "application/json");
+			// xhr.withCredentials = true;
+
+			// xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+
+			// xhr.onreadystatechange = function (response) {
+			// 	console.log("status " + xhr.status);
+			// 	console.log(xhr.statusText);
+			// 	if (xhr.readyState == 4 && xhr.status == 200) {
+			// 		document.getElementById('res').innerHTML = xhr.responseText;
+			// 	}
+			// };
+			// obj = {
+			// 	username: name,
+			// 	password: pass
+			// }
+			// console.log(obj)
+			// xhr.send(obj);
+
+		}
+	});
+
+	// document.getElementById("ok").onclick = send;
+	// function send() {
+	// 	console.log('Clicked!');
+	// 	var name=document.getElementsByName("username")[0].value;
+	// 	var pass=document.getElementsByName("password")[0].value;
+	// 	var xhr = new XMLHttpRequest();
+	// 	var url = "http://localhost:10010/login";
+	// 	xhr.open("POST", url, true);
+	// 	xhr.setRequestHeader("Content-type", "application/json");
+	// 	xhr.withCredentials = true;
+	// 	xhr.onreadystatechange = function(response) {
+	// 	console.log("status "+xhr.status);
+	// 	console.log(xhr.statusText);
+	// 	if (xhr.readyState == 4 && xhr.status == 200) {
+	// 		document.getElementById('res').innerHTML=xhr.responseText;
+	// 	}
+	// 	};
+	// 	obj = {
+	// 		username : name,
+	// 		password: pass
+	// 	}
+	// 	console.log(obj)
+	// 	xhr.send(obj);
+
+	// }
+</script>
+
+</html>

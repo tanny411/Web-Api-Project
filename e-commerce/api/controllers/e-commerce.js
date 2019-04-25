@@ -31,9 +31,10 @@ function Login(req, res) {
     if (err) throw err;
     if(result.length==1 && result[0].pass==pass) {
       
-      res.json("HI "+result[0].name);
+      //res.json("HI "+result[0].name);
+      res.json("1");
     } 
-    else res.status("403").json("Not Verified");
+    else res.json("Not Verified");
   });
 }
 
