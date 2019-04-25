@@ -2,6 +2,10 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
+
+var cors = require('cors');
+app.use(cors());
+
 module.exports = app; // for testing
 
 var config = {
@@ -13,8 +17,8 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 
   // install middleware
   swaggerExpress.register(app);
-
-  var port = process.env.PORT || 10010;
+  //console.log("PORT = "+process.env.PORT)
+  var port = process.env.PORT || 10100;
   app.listen(port);
 
   if (swaggerExpress.runner.swagger.paths['/hello']) {

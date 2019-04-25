@@ -29,7 +29,10 @@ function Login(req, res) {
   //var hello = util.format('Hello, %s!, Your password is %s.', name, pass);
   con.query("SELECT pass,name FROM user WHERE name='"+name+"'", function (err, result) {
     if (err) throw err;
-    if(result.length==1 && result[0].pass==pass) res.json("HI "+result[0].name);
+    if(result.length==1 && result[0].pass==pass) {
+      
+      res.json("HI "+result[0].name);
+    } 
     else res.status("403").json("Not Verified");
   });
 }
