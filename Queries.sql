@@ -37,3 +37,17 @@ create table cart (
   `quantity` int NULL,
   PRIMARY KEY (`id`));
   
+use bank;
+create table user (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `acc` int,
+  `pin` int,
+  `balance` int,
+  PRIMARY KEY (`id`));
+  
+insert into user(acc,pin,balance)values
+(2015331042,42,1000),
+(2015331000,0,500),
+(2015331028,28,20000);
+
+select * from user;

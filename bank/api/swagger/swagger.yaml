@@ -45,6 +45,26 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
             
+  /accVerify:
+    x-swagger-router-controller: bank
+    post:
+      operationId: accVerify
+      parameters:
+        - name: Verify Account
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/accVerify"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
   /send:
     x-swagger-router-controller: bank
     post:
@@ -149,6 +169,16 @@ definitions:
       To Account:
         type: number
         
+  accVerify:
+    required:
+      - Acc
+      - Pin
+    properties:
+      Acc:
+        type: number
+      Pin:
+        type: number
+        
   AmountError:
     type: object
     properties:
@@ -156,11 +186,8 @@ definitions:
         type: string
         
   GeneralResponse:
-    type: object
+    required:
+      - message
     properties:
-      success:
-        type: number
-        description: returns 1 if successful
-      description:
+      message:
         type: string
-        description: a short comment
