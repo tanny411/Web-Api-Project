@@ -4,7 +4,8 @@ var mysql = require('mysql');
 module.exports = {
   Login: Login,
   addAcc:addAcc,
-  buy:buy
+  buy:buy,
+  fetch:fetch
 };
 
 var con = mysql.createConnection({
@@ -55,6 +56,19 @@ function addAcc(req,res){
       console.log(result);
       res.json(result.affectedRows);
     }
+  });
+}
+
+function fetch(req, res) {
+  var name = req.body.name;
+  console.log('Fetch Request Ashche')
+  con.query("SELECT acc,pin FROM user WHERE name='"+name+"'", function (err, result) {
+    if (err) throw err;
+    obj={
+      acc:Number(result[0].acc),
+      pin:Number(result[0].pin),
+    };
+    res.json(obj);
   });
 }
 

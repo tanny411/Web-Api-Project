@@ -36,10 +36,6 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/BalanceResponse"
-        "401":
-          description: Amount Not Available
-          schema:
-            $ref: "#/definitions/AmountError"
         default:
           description: Error
           schema:
@@ -115,12 +111,12 @@ paths:
 definitions:
   Balance:
     required:
-      - Account Number
-      - Pin
+      - acc
+      - pin
     properties:
-      Account Number:
+      acc:
         type: number
-      Pin:
+      pin:
         type: number
         
   BalanceResponse:
@@ -178,12 +174,6 @@ definitions:
         type: number
       Pin:
         type: number
-        
-  AmountError:
-    type: object
-    properties:
-      message:
-        type: string
         
   GeneralResponse:
     required:

@@ -126,13 +126,53 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-            
+  
+  /fetch:
+    # our controller name
+    x-swagger-router-controller: e-commerce
+    post:
+      operationId: fetch
+      parameters:
+        - name: Fetch
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Fetch"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/FetchResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
   /swagger:
     x-swagger-pipe: swagger_raw
     
     
 # complex objects have schema definitions
 definitions:
+
+  Fetch:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        
+  FetchResponse:
+    type: object
+    properties:
+      acc:
+        type: number
+      pin:
+        type: number
+    required:
+      - acc
+      - pin
+  
   SimpleResponse:
     required:
       - message
