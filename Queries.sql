@@ -1,6 +1,8 @@
 create database ecommerce;
 create database bank;
 create database supplier;
+
+###----------------###
 use ecommerce;
 create table user (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -36,7 +38,10 @@ create table cart (
   `cost` int NULL,
   `quantity` int NULL,
   PRIMARY KEY (`id`));
+
+select * from user;
   
+###----------------###
 use bank;
 create table user (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -58,10 +63,24 @@ drop table transactions;
 create table transactions (
   `id` INT NOT NULL AUTO_INCREMENT,
   `acc` int,
+  `to_acc` int,
   `amount` int,
   `record` varchar(100) NOT NULL,
   PRIMARY KEY (`id`));
   
 select * from transactions;
 
-insert into transactions(acc,amount,record)values (2015331042,100,'dummyString');
+###----------------###
+use supplier;
+create table products (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `cost` int NULL,
+  PRIMARY KEY (`id`));
+  
+insert into products(name,cost)values
+('Almonds',20),
+('Cashews',30),
+('Pistachios',40);
+
+select * from products;
