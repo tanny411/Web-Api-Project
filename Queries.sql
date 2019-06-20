@@ -44,10 +44,24 @@ create table user (
   `pin` int,
   `balance` int,
   PRIMARY KEY (`id`));
-  
+#42 is Aysha
+#0 is ecommerce
 insert into user(acc,pin,balance)values
 (2015331042,42,1000),
 (2015331000,0,500),
 (2015331028,28,20000);
 
 select * from user;
+
+drop table transactions;
+
+create table transactions (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `acc` int,
+  `amount` int,
+  `record` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`));
+  
+select * from transactions;
+
+insert into transactions(acc,amount,record)values (2015331042,100,'dummyString');

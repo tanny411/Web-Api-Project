@@ -11,7 +11,7 @@ module.exports = {
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: ""
+  password: "root"
 });
 
 con.connect(function(err) {

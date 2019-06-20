@@ -83,18 +83,17 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
             
-  /verify:
+  /record:
     x-swagger-router-controller: bank
     post:
-      description: Verify Trasaction
-      operationId: verify
+      description: Create Trasaction Record
+      operationId: record
       parameters:
-        - name: Verify
-          description: Verify Trasaction
+        - name: Record
           in: body
           required: true
           schema:
-            $ref: "#/definitions/Verify"
+            $ref: "#/definitions/Record"
       responses:
         "200":
           description: Success
@@ -149,20 +148,14 @@ definitions:
       To Account:
         type: number
         
-  Verify:
+  Record:
     required:
-      - From Account
-      - Transaction record
-      - Amount
-      - To Account
+      - amt
+      - acc
     properties:
-      From Account:
+      amt:
         type: number
-      Transaction record:
-        type: number
-      Amount:
-        type: number
-      To Account:
+      acc:
         type: number
         
   accVerify:
