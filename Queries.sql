@@ -16,7 +16,11 @@ insert into user(name,pass)values
 ('Ripul Sir','tpass'),
 ('Anisur Rahman','apass');
 
+insert into user(name,pass)values ('Anisur Rahman','apass');
+
 select * from user;
+
+delete from user where id=6;
 
 create table products (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -51,10 +55,15 @@ create table user (
   PRIMARY KEY (`id`));
 #42 is Aysha
 #0 is ecommerce
+#28 supplier
+#90 anis
 insert into user(acc,pin,balance)values
 (2015331042,42,1000),
 (2015331000,0,500),
 (2015331028,28,20000);
+
+insert into user(acc,pin,balance)values (2015331090,90,1000);
+insert into user(acc,pin,balance)values (2015331028,28,10000);
 
 select * from user;
 
