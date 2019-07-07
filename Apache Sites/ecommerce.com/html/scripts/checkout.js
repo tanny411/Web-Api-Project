@@ -1,4 +1,4 @@
-function do1(txt,tot,stuff){
+function collect_user(txt,tot,stuff){
     ///FETCH USER INFO
     obj={
         name:(document.cookie.split(','))[0]
@@ -13,7 +13,7 @@ function do1(txt,tot,stuff){
             var acc = result.acc;
             var pin = result.pin;
             txt.innerHTML="Information Fetched...";
-            do2(acc,pin,txt,tot,stuff);
+            check_balance(acc,pin,txt,tot,stuff);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             txt.innerHTML = "Error Fetching Data!";
@@ -23,7 +23,7 @@ function do1(txt,tot,stuff){
     });
 }
 
-function do2(acc,pin,txt,tot,stuff){
+function check_balance(acc,pin,txt,tot,stuff){
     ///CHECK BALANCE
     obj={
         acc:acc,
@@ -38,7 +38,7 @@ function do2(acc,pin,txt,tot,stuff){
             // console.log(result);
             if(result>=tot){
                 txt.innerHTML="Checked Balance...";
-                do3(acc,pin,txt,tot,stuff);
+                transfer_money_to_ecommerce(acc,pin,txt,tot,stuff);
             }
             else{
                 txt.innerHTML = "Sorry, Insufficient Balance!";
@@ -53,7 +53,7 @@ function do2(acc,pin,txt,tot,stuff){
     });
 }
 
-function do3(facc,pin,txt,tot,stuff){
+function transfer_money_to_ecommerce(facc,pin,txt,tot,stuff){
     var tacc=2015331000; //ecommerce bank account
     ///TELL BANK TO TRANSFER MONEY
     obj={
@@ -71,7 +71,7 @@ function do3(facc,pin,txt,tot,stuff){
         success: function (result) {
             // console.log(result);
             txt.innerHTML="Congratulations, Payment Successful!";
-            do4(tot-5,txt,stuff); // ecommerce keeps some money
+            give_money_to_supplier(tot-5,txt,stuff); // ecommerce keeps some money
         },
         error: function (jqXHR, textStatus, errorThrown) {
             txt.innerHTML = "Error Fetching Data!";
@@ -81,7 +81,7 @@ function do3(facc,pin,txt,tot,stuff){
     });
 }
 
-function do4(tot,txt,stuff){
+function give_money_to_supplier(tot,txt,stuff){
     var facc=2015331000; //ecommerce bank account
     var pin=10;
     var tacc=2015331028; //supplier bank account
@@ -101,7 +101,7 @@ function do4(tot,txt,stuff){
         data: JSON.stringify(obj),
         success: function (result) {
             console.log(result);
-            do5(result,tot,stuff,txt);
+            supply_product(result,tot,stuff,txt);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             txt.innerHTML = "Error With Supplier!";
@@ -111,7 +111,7 @@ function do4(tot,txt,stuff){
     });
 }
 
-function do5(result,tot,stuff,txt){
+function supply_product(result,tot,stuff,txt){
     obj={
         Amount : tot,
         Account : 2015331000, //ecommerce bank account
@@ -185,6 +185,6 @@ $(function (){
         prog.innerHTML="<i id='rem' class='fa fa-circle-o-notch fa-spin' style='margin-right: 10px;font-size: 30px;'></i>"+prog.innerHTML;
         var txt = document.getElementById('progtxt');
         txt.innerHTML="Process Started...";
-        do1(txt,tot,stuff);
+        collect_user(txt,tot,stuff);
     });
 });
